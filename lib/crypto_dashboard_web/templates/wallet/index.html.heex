@@ -23,4 +23,4 @@
   </tbody>
 </table>
 
-<span><%= link "New Wallet", to: Routes.wallet_path(@conn, :new) %></span>
+<span><%= link raw("<i class='material-icons'>add</i>"), to: Routes.wallet_path(@conn, :new), class: "btn-floating waves-effect blue darken-4 btn-large" %></span>

@@ -7,17 +7,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= csrf_meta_tag() %>
   <%= live_title_tag assigns[:page_title] || "CryptoDashboard" , suffix: " · Phoenix Framework" %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
   <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css" )} />
+  <script
+			  src="https://code.jquery.com/jquery-3.6.0.min.js"
+			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			  crossorigin="anonymous"></script>
   <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js" )}></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
 <body>
   <header>
-
+    <%= if @conn.assigns[:user] do %>
+    <ul id="dropdown1" class="dropdown-content">
+      <%= for wallet <- @conn.assigns[:wallets] do %>
+        <li>
+          <%= link wallet.name , to: Routes.wallet_path(@conn, :show, wallet) %>
+        </li>
+      <% end %>
+    </ul>
+    <% end %>
     <nav class="grey darken-3">
       <div class="nav-wrapper">
-
         <%= if @conn.assigns[:user] do %>
         <%= link "Crypto Dashboard" , to: Routes.page_path(@conn, :home), class: "brand-logo" %>
         <% else %>
@@ -26,6 +39,7 @@
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <%= if @conn.assigns[:user] do %>
+          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><%= if @conn.assigns[:wallet], do: @conn.assigns[:wallet].name, else: "Wallets" %><i class="material-icons right">arrow_drop_down</i></a></li>
           <li>
             <%= link "Sign Out" , to: Routes.auth_path(@conn, :signout) %>
           </li>

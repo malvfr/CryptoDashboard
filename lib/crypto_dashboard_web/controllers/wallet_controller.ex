@@ -30,6 +30,7 @@ defmodule CryptoDashboardWeb.WalletController do
 
   def show(conn, %{"id" => id}) do
     wallet = Portfolio.get_wallet!(id)
+    conn = assign(conn, :wallet, wallet)
     render(conn, "show.html", wallet: wallet)
   end
 

@@ -3,6 +3,7 @@ defmodule CryptoDashboardWeb.Plugs.SetUser do
 
   alias CryptoDashboard.Repo
   alias CryptoDashboard.Models.User
+  alias CryptoDashboard.Portfolio
 
   def init(_params) do
   end
@@ -12,7 +13,9 @@ defmodule CryptoDashboardWeb.Plugs.SetUser do
 
     cond do
       user = user_id && Repo.get(User, user_id) ->
-        assign(conn, :user, user)
+        wallets = Portfolio.list_wallets(user.id)
+        conn = assign(conn, :user, user)
+        assign(conn, :wallets, wallets)
 
       true ->
         assign(conn, :user, nil)

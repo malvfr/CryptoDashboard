@@ -1,4 +1,4 @@
-<h1>Show Wallet</h1>
+<h1><%= @wallet.name %></h1>
 
 <ul>
 
@@ -9,5 +9,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.wallet_path(@conn, :edit, @wallet) %></span> |
-<span><%= link "Back", to: Routes.wallet_path(@conn, :index) %></span>
+<span><%= link "Edit", to: Routes.wallet_path(@conn, :edit, @wallet), class: "waves-effect blue darken-4 btn" %></span> 
+<span><%= link "Back", to: Routes.wallet_path(@conn, :index), class: "waves-effect grey lighten-1 btn" %></span>

@@ -1,5 +1,6 @@
+<br />
+<span><%= link "Back", to: Routes.wallet_path(@conn, :index), class: "waves-effect grey lighten-1 btn" %></span>
+
 <h1>New Wallet</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.wallet_path(@conn, :create)) %>
-
-<span><%= link "Back", to: Routes.wallet_path(@conn, :index) %></span>
