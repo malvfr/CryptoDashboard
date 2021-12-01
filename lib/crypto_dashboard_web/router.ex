@@ -8,6 +8,7 @@ defmodule CryptoDashboardWeb.Router do
     plug :put_root_layout, {CryptoDashboardWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug CryptoDashboardWeb.Plugs.SetUser
   end
 
   pipeline :api do
@@ -18,6 +19,21 @@ defmodule CryptoDashboardWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/home", PageController, :home
+  end
+
+  scope "/portfolio", CryptoDashboardWeb do
+    pipe_through :browser
+    resources "/wallet", WalletController
+
+  end
+
+  scope "/auth", CryptoDashboardWeb do
+    pipe_through :browser
+
+    get "/signout", AuthController, :signout
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
   end
 
   # Other scopes may use custom stacks.
