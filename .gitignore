@@ -32,3 +32,4 @@ crypto_dashboard-*.tar
 npm-debug.log
 /assets/node_modules/
 
+postgres_data
