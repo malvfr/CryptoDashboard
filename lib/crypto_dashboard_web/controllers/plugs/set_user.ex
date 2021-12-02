@@ -11,15 +11,16 @@ defmodule CryptoDashboardWeb.Plugs.SetUser do
   def call(conn, _params) do
     user_id = get_session(conn, :user_id)
 
-    conn = cond do
-      user = user_id && Repo.get(User, user_id) ->
-        wallets = Portfolio.list_wallets(user.id)
-        conn = assign(conn, :user, user)
-        assign(conn, :wallets, wallets)
+    conn =
+      cond do
+        user = user_id && Repo.get(User, user_id) ->
+          wallets = Portfolio.list_wallets(user.id)
+          conn = assign(conn, :user, user)
+          assign(conn, :wallets, wallets)
 
-      true ->
-        assign(conn, :user, nil)
-    end
+        true ->
+          assign(conn, :user, nil)
+      end
 
     wallet_id = get_session(conn, :wallet_id)
 

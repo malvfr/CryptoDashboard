@@ -5,21 +5,24 @@ defmodule CryptoDashboardWeb.AssetController do
   alias CryptoDashboard.Portfolio.Asset
 
   def index(conn, params) do
-    wallet_id = cond do
-      params["wallet_id"] -> params["wallet_id"]
-      conn.assigns[:wallet].id -> conn.assigns[:wallet].id
-    end
+    wallet_id =
+      cond do
+        params["wallet_id"] -> params["wallet_id"]
+        conn.assigns[:wallet].id -> conn.assigns[:wallet].id
+      end
 
-    conn = conn
-    |> put_session(:wallet_id, wallet_id)
+    conn =
+      conn
+      |> put_session(:wallet_id, wallet_id)
 
-    conn = cond do
-      wallet = wallet_id && Portfolio.get_wallet!(wallet_id) ->
-        assign(conn, :wallet, wallet)
+    conn =
+      cond do
+        wallet = wallet_id && Portfolio.get_wallet!(wallet_id) ->
+          assign(conn, :wallet, wallet)
 
-      true ->
-        assign(conn, :wallet, nil)
-    end
+        true ->
+          assign(conn, :wallet, nil)
+      end
 
     assets = Portfolio.list_assets(wallet_id)
     render(conn, "index.html", assets: assets)

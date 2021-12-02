@@ -22,6 +22,7 @@ defmodule CryptoDashboardWeb.AuthController do
         conn
         |> put_session(:user_id, user.id)
         |> redirect(to: CryptoDashboardWeb.Router.Helpers.page_path(conn, :home))
+
       {:error, _reason} ->
         conn
         |> put_flash(:error, "Error signing in")
@@ -33,6 +34,7 @@ defmodule CryptoDashboardWeb.AuthController do
     case CryptoDashboard.Repo.get_by(User, email: changeset.changes.email) do
       nil ->
         CryptoDashboard.Repo.insert(changeset)
+
       user ->
         {:ok, user}
     end

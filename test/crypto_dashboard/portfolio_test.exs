@@ -15,8 +15,6 @@ defmodule CryptoDashboard.PortfolioTest do
     {:ok, user: user}
   end
 
-
-
   describe "wallets" do
     alias CryptoDashboard.Portfolio.Wallet
 
@@ -25,7 +23,6 @@ defmodule CryptoDashboard.PortfolioTest do
     @invalid_attrs %{name: nil}
 
     test "list_wallets/0 returns all wallets", state do
-
       wallet = wallet_fixture(%{user_id: state.user.id})
       assert Portfolio.list_wallets(state.user.id) == [wallet]
     end

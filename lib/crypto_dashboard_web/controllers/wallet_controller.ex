@@ -30,8 +30,10 @@ defmodule CryptoDashboardWeb.WalletController do
 
   def show(conn, %{"id" => id}) do
     wallet = Portfolio.get_wallet!(id)
-    conn = conn
-    |> put_session(:wallet_id, wallet.id)
+
+    conn =
+      conn
+      |> put_session(:wallet_id, wallet.id)
 
     render(conn, "show.html", wallet: wallet)
   end
