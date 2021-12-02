@@ -19,4 +19,21 @@ defmodule CryptoDashboard.PortfolioFixtures do
 
     wallet
   end
+
+  @doc """
+  Generate a asset.
+  """
+  def asset_fixture(attrs \\ %{}) do
+    {:ok, asset} =
+      attrs
+      |> Enum.into(%{
+        asset_code: 42,
+        quantity: 120.5,
+        unit_price: 120.5,
+        wallet_id: attrs.wallet_id
+      })
+      |> CryptoDashboard.Portfolio.create_asset()
+
+    asset
+  end
 end

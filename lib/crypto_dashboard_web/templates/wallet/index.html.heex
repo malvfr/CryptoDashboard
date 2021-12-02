@@ -1,6 +1,6 @@
 <h1>Listing Wallets</h1>
 
-<table>
+<table class="striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -11,16 +11,15 @@
   <tbody>
 <%= for wallet <- @wallets do %>
     <tr>
-      <td><%= wallet.name %></td>
+      <td><h6><%= wallet.name %></h6></td>
 
-      <td>
-        <span><%= link "Show", to: Routes.wallet_path(@conn, :show, wallet) %></span>
-        <span><%= link "Edit", to: Routes.wallet_path(@conn, :edit, wallet) %></span>
-        <span><%= link "Delete", to: Routes.wallet_path(@conn, :delete, wallet), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      <td class="right-align">
+        <span><%= link "Edit", to: Routes.wallet_path(@conn, :edit, wallet), class: "waves-effect blue darken-4 btn" %></span>
+        <span><%= link "Delete", to: Routes.wallet_path(@conn, :delete, wallet), method: :delete, data: [confirm: "Are you sure?"], class: "waves-effect red accent-4 btn" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Wallet", to: Routes.wallet_path(@conn, :new) %></span>
+<span><%= link raw("<i class='material-icons'>add</i>"), to: Routes.wallet_path(@conn, :new), class: "btn-floating waves-effect blue darken-4 btn-large" %></span>

@@ -1,5 +1,13 @@
 <main class="container">
-  <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-  <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+  <%= unless is_nil(get_flash(@conn, :error)) do %>
+    <script>
+      M.toast({html: '<%=get_flash(@conn, :error) %>', classes: 'red accent-4'})
+    </script>
+  <% end %>
+  <%= unless is_nil(get_flash(@conn, :info)) do %>
+    <script>
+      M.toast({html: '<%=get_flash(@conn, :info) %>', classes: 'teal accent-4'})
+    </script>
+  <% end %>
   <%= @inner_content %>
 </main>
