@@ -25,6 +25,7 @@ defmodule CryptoDashboardWeb.Router do
   scope "/portfolio", CryptoDashboardWeb do
     pipe_through :browser
     resources "/wallet", WalletController
+    resources "/assets", AssetController
 
   end
 

@@ -24,7 +24,7 @@
     <ul id="dropdown1" class="dropdown-content">
       <%= for wallet <- @conn.assigns[:wallets] do %>
         <li>
-          <%= link wallet.name , to: Routes.wallet_path(@conn, :show, wallet) %>
+          <%= link wallet.name , to: Routes.asset_path(@conn, :index, %{:wallet_id => wallet.id}) %>
         </li>
       <% end %>
     </ul>
@@ -52,6 +52,7 @@
       </div>
     </nav>
   </header>
+  <br />
   <%= @inner_content %>
 </body>
 

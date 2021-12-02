@@ -21,7 +21,7 @@ defmodule CryptoDashboardWeb.WalletController do
       {:ok, wallet} ->
         conn
         |> put_flash(:info, "Wallet created successfully.")
-        |> redirect(to: Routes.wallet_path(conn, :show, wallet))
+        |> redirect(to: Routes.wallet_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -30,7 +30,9 @@ defmodule CryptoDashboardWeb.WalletController do
 
   def show(conn, %{"id" => id}) do
     wallet = Portfolio.get_wallet!(id)
-    conn = assign(conn, :wallet, wallet)
+    conn = conn
+    |> put_session(:wallet_id, wallet.id)
+
     render(conn, "show.html", wallet: wallet)
   end
 

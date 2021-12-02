@@ -71,4 +71,71 @@ defmodule CryptoDashboard.PortfolioTest do
       assert %Ecto.Changeset{} = Portfolio.change_wallet(wallet)
     end
   end
+
+  describe "assets" do
+    alias CryptoDashboard.Portfolio.Asset
+
+    import CryptoDashboard.PortfolioFixtures
+
+    @invalid_attrs %{asset_code: nil, quantity: nil, unit_price: nil}
+
+    test "list_assets/0 returns all assets", state do
+      wallet = wallet_fixture(%{user_id: state.user.id})
+      asset = asset_fixture(%{wallet_id: wallet.id})
+      assert Portfolio.list_assets(wallet.id) == [asset]
+    end
+
+    test "get_asset!/1 returns the asset with given id", state do
+      wallet = wallet_fixture(%{user_id: state.user.id})
+      asset = asset_fixture(%{wallet_id: wallet.id})
+      assert Portfolio.get_asset!(asset.id) == asset
+    end
+
+    test "create_asset/1 with valid data creates a asset", state do
+      wallet = wallet_fixture(%{user_id: state.user.id})
+
+      valid_attrs = %{asset_code: 42, quantity: 120.5, unit_price: 120.5, wallet_id: wallet.id}
+
+      assert {:ok, %Asset{} = asset} = Portfolio.create_asset(valid_attrs)
+      assert asset.asset_code == 42
+      assert asset.quantity == 120.5
+      assert asset.unit_price == 120.5
+      assert asset.wallet_id == wallet.id
+    end
+
+    test "create_asset/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Portfolio.create_asset(@invalid_attrs)
+    end
+
+    test "update_asset/2 with valid data updates the asset", state do
+      wallet = wallet_fixture(%{user_id: state.user.id})
+      asset = asset_fixture(%{wallet_id: wallet.id})
+      update_attrs = %{asset_code: 43, quantity: 456.7, unit_price: 456.7}
+
+      assert {:ok, %Asset{} = asset} = Portfolio.update_asset(asset, update_attrs)
+      assert asset.asset_code == 43
+      assert asset.quantity == 456.7
+      assert asset.unit_price == 456.7
+    end
+
+    test "update_asset/2 with invalid data returns error changeset", state do
+      wallet = wallet_fixture(%{user_id: state.user.id})
+      asset = asset_fixture(%{wallet_id: wallet.id})
+      assert {:error, %Ecto.Changeset{}} = Portfolio.update_asset(asset, @invalid_attrs)
+      assert asset == Portfolio.get_asset!(asset.id)
+    end
+
+    test "delete_asset/1 deletes the asset", state do
+      wallet = wallet_fixture(%{user_id: state.user.id})
+      asset = asset_fixture(%{wallet_id: wallet.id})
+      assert {:ok, %Asset{}} = Portfolio.delete_asset(asset)
+      assert_raise Ecto.NoResultsError, fn -> Portfolio.get_asset!(asset.id) end
+    end
+
+    test "change_asset/1 returns a asset changeset", state do
+      wallet = wallet_fixture(%{user_id: state.user.id})
+      asset = asset_fixture(%{wallet_id: wallet.id})
+      assert %Ecto.Changeset{} = Portfolio.change_asset(asset)
+    end
+  end
 end

@@ -44,5 +44,6 @@ liveSocket.connect()
 window.liveSocket = liveSocket
 
 $( document ).ready(() => {
-    $(".dropdown-trigger").dropdown();   
+    $(".dropdown-trigger").dropdown();
+    $('select').formSelect();
 });

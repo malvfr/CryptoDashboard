@@ -14,7 +14,6 @@
       <td><h6><%= wallet.name %></h6></td>
 
       <td class="right-align">
-        <span><%= link "Show", to: Routes.wallet_path(@conn, :show, wallet), class: "waves-effect blue darken-4 btn" %></span>
         <span><%= link "Edit", to: Routes.wallet_path(@conn, :edit, wallet), class: "waves-effect blue darken-4 btn" %></span>
         <span><%= link "Delete", to: Routes.wallet_path(@conn, :delete, wallet), method: :delete, data: [confirm: "Are you sure?"], class: "waves-effect red accent-4 btn" %></span>
       </td>

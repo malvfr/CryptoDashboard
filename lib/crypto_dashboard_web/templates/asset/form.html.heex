@@ -1,0 +1,24 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :asset_code %>
+  <%= select f, :asset_code, CryptoDashboard.Enums.CurrencyEnum.all() %>
+  <%= error_tag f, :asset_code %>
+
+  <br />
+  <%= label f, :quantity %>
+  <%= number_input f, :quantity, step: "any" %>
+  <%= error_tag f, :quantity %>
+
+  <%= label f, :unit_price %>
+  <%= number_input f, :unit_price, step: "any" %>
+  <%= error_tag f, :unit_price %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+</.form>
