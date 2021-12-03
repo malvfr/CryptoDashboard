@@ -1,5 +1,4 @@
 defmodule CryptoDashboard.PortfolioFixtures do
-
   @moduledoc """
   This module defines test helpers for creating
   entities via the `CryptoDashboard.Portfolio` context.
