@@ -1,4 +1,4 @@
-<h1>Listing Wallets</h1>
+<h1>My Wallets</h1>
 
 <table class="striped">
   <thead>
@@ -14,12 +14,13 @@
       <td><h6><%= wallet.name %></h6></td>
 
       <td class="right-align">
-        <span><%= link "Edit", to: Routes.wallet_path(@conn, :edit, wallet), class: "waves-effect blue darken-4 btn" %></span>
-        <span><%= link "Delete", to: Routes.wallet_path(@conn, :delete, wallet), method: :delete, data: [confirm: "Are you sure?"], class: "waves-effect red accent-4 btn" %></span>
+        <span><%= link raw("<i class='material-icons'>navigate_next</i>"), to: Routes.asset_path(@conn, :index, %{:wallet_id => wallet.id}), class: "waves-effect blue darken-4 btn" %></span>
+        <span><%= link raw("<i class='material-icons'>edit</i>"), to: Routes.wallet_path(@conn, :edit, wallet), class: "waves-effect blue darken-4 btn" %></span>
+        <span><%= link raw("<i class='material-icons'>delete</i>"), to: Routes.wallet_path(@conn, :delete, wallet), method: :delete, data: [confirm: "Are you sure?"], class: "waves-effect red accent-4 btn" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
+<br />
 <span><%= link raw("<i class='material-icons'>add</i>"), to: Routes.wallet_path(@conn, :new), class: "btn-floating waves-effect blue darken-4 btn-large" %></span>

@@ -1,23 +1,29 @@
-<h1>Show Asset</h1>
+<h1>Listing Assets</h1>
 
-<ul>
+<table>
+  <thead>
+    <tr>
+      <th>Asset code</th>
+      <th>Quantity</th>
+      <th>Unit price</th>
 
-  <li>
-    <strong>Asset code:</strong>
-    <%= @asset.asset_code %>
-  </li>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for asset <- @assets do %>
+    <tr>
+      <td><%= CryptoDashboard.Enums.CurrencyEnum.toString(asset.asset_code) %></td>
+      <td><%= asset.quantity %></td>
+      <td><%= asset.unit_price %></td>
 
-  <li>
-    <strong>Quantity:</strong>
-    <%= @asset.quantity %>
-  </li>
+      <td>
+        <span><%= link raw("<i class='material-icons'>edit</i>"), to: Routes.asset_path(@conn, :edit, asset), class: "waves-effect blue darken-4 btn" %></span>
+        <span><%= link raw("<i class='material-icons'>delete</i>")  , to: Routes.asset_path(@conn, :delete, asset), method: :delete, data: [confirm: "Are you sure?"], class: "waves-effect red accent-4 btn" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
 
-  <li>
-    <strong>Unit price:</strong>
-    <%= @asset.unit_price %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.asset_path(@conn, :edit, @asset) %></span> |
-<span><%= link "Back", to: Routes.asset_path(@conn, :index) %></span>
+<span><%= link "New Asset", to: Routes.asset_path(@conn, :new) %></span>

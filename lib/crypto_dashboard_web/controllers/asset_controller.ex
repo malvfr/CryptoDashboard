@@ -44,9 +44,10 @@ defmodule CryptoDashboardWeb.AssetController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    asset = Portfolio.get_asset!(id)
-    render(conn, "show.html", asset: asset)
+  def show(conn, params) do
+    IO.inspect params
+    assets = Portfolio.list_asset(params["id"])
+    render(conn, "show.html", assets: assets)
   end
 
   def edit(conn, %{"id" => id}) do
@@ -62,7 +63,7 @@ defmodule CryptoDashboardWeb.AssetController do
       {:ok, asset} ->
         conn
         |> put_flash(:info, "Asset updated successfully.")
-        |> redirect(to: Routes.asset_path(conn, :show, asset))
+        |> redirect(to: Routes.asset_path(conn, :show, asset.asset_code))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", asset: asset, changeset: changeset)

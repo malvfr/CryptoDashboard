@@ -46,4 +46,13 @@ window.liveSocket = liveSocket
 $( document ).ready(() => {
     $(".dropdown-trigger").dropdown();
     $('select').formSelect();
+
+    var elems = document.querySelectorAll('.tap-target');
+
+    if (elems) {
+        var instances = M.TapTarget.init(elems);
+        if (instances && instances[0]) {
+            instances[0].open();
+        }
+    }
 });
