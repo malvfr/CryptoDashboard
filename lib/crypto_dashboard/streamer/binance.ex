@@ -7,7 +7,7 @@ defmodule CryptoDashboard.Streamer.Binance do
     IO.inspect(symbol, label: "symbol", limit: :infinity)
 
     WebSockex.start_link(
-      "#{@stream_endpoint}#{symbol}@trade",
+      "#{@stream_endpoint}#{symbol}@kline_1m",
       __MODULE__,
       state
     )
@@ -15,6 +15,12 @@ defmodule CryptoDashboard.Streamer.Binance do
 
   def handle_frame({type, msg}, state) do
     IO.puts("Received Message - Type: #{inspect(type)} -- Message: #{inspect(msg)}")
+
+    case Jason.decode(msg) do
+      {:ok, message} -> IO.inspect(message)
+      {:error, error} -> IO.inspect(error)
+    end
+
     {:ok, state}
   end
 
