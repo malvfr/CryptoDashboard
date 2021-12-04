@@ -47,4 +47,5 @@
   "ueberauth": {:hex, :ueberauth, "0.7.0", "9c44f41798b5fa27f872561b6f7d2bb0f10f03fdd22b90f454232d7b087f4b75", [:mix], [{:plug, "~> 1.5", [hex: :plug, repo: "hexpm", optional: false]}], "hexpm", "2efad9022e949834f16cc52cd935165049d81fa9e925690f91035c2e4b58d905"},
   "ueberauth_github": {:hex, :ueberauth_github, "0.8.1", "0be487b5afc29bc805fa5e31636f37c8f09d5159ef73fc08c4c7a98c9cfe2c18", [:mix], [{:oauth2, "~> 1.0 or ~> 2.0", [hex: :oauth2, repo: "hexpm", optional: false]}, {:ueberauth, "~> 0.7.0", [hex: :ueberauth, repo: "hexpm", optional: false]}], "hexpm", "143d6130b945ea9bdbd0ef94987f40788f1d7e8090decbfc0722773155e7a74a"},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.7.0", "bc84380c9ab48177092f43ac89e4dfa2c6d62b40b8bd132b1059ecc7232f9a78", [:rebar3], [], "hexpm", "25eee6d67df61960cf6a794239566599b09e17e668d3700247bc498638152521"},
+  "websockex": {:hex, :websockex, "0.4.3", "92b7905769c79c6480c02daacaca2ddd49de936d912976a4d3c923723b647bf0", [:mix], [], "hexpm", "95f2e7072b85a3a4cc385602d42115b73ce0b74a9121d0d6dbbf557645ac53e4"},
 }
