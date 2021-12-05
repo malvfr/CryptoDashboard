@@ -43,16 +43,17 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
-$( document ).ready(() => {
-    $(".dropdown-trigger").dropdown();
-    $('select').formSelect();
+// Inicialization of the dorpdown menus
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize dropdowns
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    M.Dropdown.init(elems);
 
-    var elems = document.querySelectorAll('.tap-target');
+    // Initialize tap targets
+    var targetElems = document.querySelectorAll('.tap-target');
+    var instances = M.TapTarget.init(targetElems);
 
-    if (elems) {
-        var instances = M.TapTarget.init(elems);
-        if (instances && instances[0]) {
-            instances[0].open();
-        }
+    if (instances && instances[0]) {
+        instances[0].open();
     }
 });
