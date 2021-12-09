@@ -52,7 +52,8 @@ defmodule CryptoDashboard.MixProject do
       {:ueberauth, "~> 0.6"},
       {:ueberauth_github, "~> 0.7"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false}
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:websockex, "~> 0.4.3"}
     ]
   end
 

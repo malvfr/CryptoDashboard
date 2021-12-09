@@ -54,9 +54,9 @@ import_config "#{config_env()}.exs"
 
 config :ueberauth, Ueberauth,
   providers: [
-    github: { Ueberauth.Strategy.Github, [default_scope: "user:email"]}
+    github: {Ueberauth.Strategy.Github, [default_scope: "user:email"]}
   ]
 
-  config :ueberauth, Ueberauth.Strategy.Github.OAuth,
-    client_id: "---",
-    client_secret: "---"
+config :ueberauth, Ueberauth.Strategy.Github.OAuth,
+  client_id: "---",
+  client_secret: "---"

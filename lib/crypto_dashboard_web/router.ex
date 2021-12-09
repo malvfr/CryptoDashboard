@@ -20,6 +20,7 @@ defmodule CryptoDashboardWeb.Router do
 
     get "/", PageController, :index
     get "/home", PageController, :home
+    live "/realtime", RealtimeDashboardLive, :index
   end
 
   scope "/portfolio", CryptoDashboardWeb do
