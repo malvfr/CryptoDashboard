@@ -1,5 +1,6 @@
 defmodule CryptoDashboard.Streamer.Binance do
   use WebSockex
+  require Logger
 
   @stream_endpoint "wss://stream.binance.com:9443/ws/"
 
@@ -23,7 +24,7 @@ defmodule CryptoDashboard.Streamer.Binance do
         )
 
       {:error, error} ->
-        IO.inspect(error)
+        Logger.error(error)
     end
 
     {:ok, state}
