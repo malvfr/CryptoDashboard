@@ -15,9 +15,11 @@ defmodule CryptoDashboard.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: CryptoDashboard.PubSub},
       # Start the Endpoint (http/https)
-      CryptoDashboardWeb.Endpoint
+      CryptoDashboardWeb.Endpoint,
       # Start a worker by calling: CryptoDashboard.Worker.start_link(arg)
-      # {CryptoDashboard.Worker, arg}
+      Supervisor.child_spec({CryptoDashboard.Streamer.Binance, "btcusdt"}, id: :btc_usdt),
+      Supervisor.child_spec({CryptoDashboard.Streamer.Binance, "xrpusdt"}, id: :xrp_udst),
+      Supervisor.child_spec({CryptoDashboard.Streamer.Binance, "ethusdt"}, id: :eth_udst)
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

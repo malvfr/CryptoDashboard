@@ -3,9 +3,7 @@ defmodule CryptoDashboard.Streamer.Binance do
 
   @stream_endpoint "wss://stream.binance.com:9443/ws/"
 
-  def start_link(symbol, state) do
-    IO.inspect(symbol, label: "symbol", limit: :infinity)
-
+  def start_link(symbol, state \\ []) do
     WebSockex.start_link(
       "#{@stream_endpoint}#{symbol}@kline_1m",
       __MODULE__,
@@ -14,11 +12,18 @@ defmodule CryptoDashboard.Streamer.Binance do
   end
 
   def handle_frame({type, msg}, state) do
-    IO.puts("Received Message - Type: #{inspect(type)} -- Message: #{inspect(msg)}")
+    # IO.puts("Received Message - Type: #{inspect(type)} -- Message: #{inspect(msg)}")
 
     case Jason.decode(msg) do
-      {:ok, message} -> IO.inspect(message)
-      {:error, error} -> IO.inspect(error)
+      {:ok, %{"s" => symbol} = message} ->
+        Phoenix.PubSub.broadcast(
+          CryptoDashboard.PubSub,
+          "currency-#{String.downcase(symbol)}",
+          message
+        )
+
+      {:error, error} ->
+        IO.inspect(error)
     end
 
     {:ok, state}
