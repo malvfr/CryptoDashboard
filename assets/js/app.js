@@ -49,6 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.dropdown-trigger');
     M.Dropdown.init(elems);
 
+    // Initiualize select elements
+    var selectElems = document.querySelectorAll('select');
+    M.FormSelect.init(selectElems);
+
     // Initialize tap targets
     var targetElems = document.querySelectorAll('.tap-target');
     var instances = M.TapTarget.init(targetElems);
