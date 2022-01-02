@@ -1,3 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 .main-hero {
   background-image: url(/images/undraw_finance_re_gnv2.svg?vsn=d);
   background-position: 10%;
