@@ -10,10 +10,6 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
   <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css" )} />
-  <script
-			  src="https://code.jquery.com/jquery-3.6.0.min.js"
-			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-			  crossorigin="anonymous"></script>
   <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js" )}></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
@@ -39,7 +35,18 @@
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <%= if @conn.assigns[:user] do %>
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><%= if @conn.assigns[:wallet], do: @conn.assigns[:wallet].name, else: "Wallets" %><i class="material-icons right">arrow_drop_down</i></a></li>
+
+            <%= if (@conn.assigns[:new_wallet] == nil and Enum.count(@conn.assigns[:wallets]) < 1) do%>
+            <li id="walletDiscovery">
+              <%= link "New wallet" , to: Routes.wallet_path(@conn, :new) %>
+            </li>
+            <% else %>
+              <li>
+                <%= link "My wallets" , to: Routes.wallet_path(@conn, :index) %>
+              </li>
+            <% end %>
+          <li>
+            <a class="dropdown-trigger" href="#!" data-target="dropdown1"><%= if @conn.assigns[:wallet], do: @conn.assigns[:wallet].name, else: "Wallets" %><i class="material-icons right">arrow_drop_down</i></a></li>
           <li>
             <%= link "Sign Out" , to: Routes.auth_path(@conn, :signout) %>
           </li>
@@ -53,6 +60,14 @@
     </nav>
   </header>
   <br />
+
+  <div class="tap-target blue darken-4" data-target="walletDiscovery">
+    <div class="tap-target-content wallet-discovery">
+      <h5>Create a new wallet</h5>
+      <p>Looks like you don't have a wallet yet. Create a new wallet to start the fun.</p>
+    </div>
+  </div>
+
   <%= @inner_content %>
 </body>
 

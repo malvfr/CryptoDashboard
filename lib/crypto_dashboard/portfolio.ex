@@ -107,6 +107,7 @@ defmodule CryptoDashboard.Portfolio do
 
   alias CryptoDashboard.Portfolio.Asset
 
+  @spec list_assets(any) :: any
   @doc """
   Returns the list of assets.
 
@@ -114,10 +115,28 @@ defmodule CryptoDashboard.Portfolio do
 
       iex> list_assets()
       [%Asset{}, ...]
-
+      select asset_code, sum(quantity), avg(unit_price) from assets group by asset_code
   """
   def list_assets(id) do
-    query = from(Asset, where: [wallet_id: ^id])
+    query = from ast in Asset,
+      where: ast.wallet_id ==  ^id,
+      select: [ast.asset_code, sum(ast.quantity), sum(ast.unit_price * ast.quantity) / sum(ast.quantity), sum(ast.unit_price * ast.quantity)],
+      group_by: [ast.asset_code]
+    Repo.all(query)
+  end
+
+  @spec list_assets(any) :: any
+  @doc """
+  Returns the list of assets.
+
+  ## Examples
+
+      iex> list_assets()
+      [%Asset{}, ...]
+      select asset_code, sum(quantity), avg(unit_price) from assets group by asset_code
+  """
+  def list_asset(id) do
+    query = from(Asset, [where: [asset_code: ^id], order_by: :inserted_at])
     Repo.all(query)
   end
 

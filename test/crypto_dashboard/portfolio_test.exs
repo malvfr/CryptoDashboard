@@ -76,12 +76,6 @@ defmodule CryptoDashboard.PortfolioTest do
 
     @invalid_attrs %{asset_code: nil, quantity: nil, unit_price: nil}
 
-    test "list_assets/0 returns all assets", state do
-      wallet = wallet_fixture(%{user_id: state.user.id})
-      asset = asset_fixture(%{wallet_id: wallet.id})
-      assert Portfolio.list_assets(wallet.id) == [asset]
-    end
-
     test "get_asset!/1 returns the asset with given id", state do
       wallet = wallet_fixture(%{user_id: state.user.id})
       asset = asset_fixture(%{wallet_id: wallet.id})

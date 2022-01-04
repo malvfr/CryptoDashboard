@@ -1,4 +1,4 @@
-<h1>Listing Assets</h1>
+<h1>Assets</h1>
 
 <table>
   <thead>
@@ -6,6 +6,7 @@
       <th>Asset code</th>
       <th>Quantity</th>
       <th>Unit price</th>
+      <th>Total</th>
 
       <th></th>
     </tr>
@@ -13,15 +14,11 @@
   <tbody>
 <%= for asset <- @assets do %>
     <tr>
-      <td><%= CryptoDashboard.Enums.CurrencyEnum.toString(asset.asset_code) %></td>
-      <td><%= asset.quantity %></td>
-      <td><%= asset.unit_price %></td>
-
-      <td>
-        <span><%= link "Show", to: Routes.asset_path(@conn, :show, asset) %></span>
-        <span><%= link "Edit", to: Routes.asset_path(@conn, :edit, asset) %></span>
-        <span><%= link "Delete", to: Routes.asset_path(@conn, :delete, asset), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
+      <td><%= CryptoDashboard.Enums.CurrencyEnum.toString(Enum.at(asset, 0)) %></td>
+      <td><%= Enum.at(asset, 1) %></td>
+      <td><%= Enum.at(asset, 2) %></td>
+      <td><%= Enum.at(asset, 3) %></td>
+      <td><%= link raw("<i class='material-icons'>edit</i>"), to: Routes.asset_path(@conn, :show, Enum.at(asset, 0)), class: "waves-effect blue darken-4 btn" %></td>
     </tr>
 <% end %>
   </tbody>

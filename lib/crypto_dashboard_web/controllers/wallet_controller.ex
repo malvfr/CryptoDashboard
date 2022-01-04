@@ -11,6 +11,7 @@ defmodule CryptoDashboardWeb.WalletController do
 
   def new(conn, _params) do
     changeset = Portfolio.change_wallet(%Wallet{})
+    conn = assign(conn, :new_wallet, true)
     render(conn, "new.html", changeset: changeset)
   end
 
