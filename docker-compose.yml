@@ -1,20 +1,14 @@
 version: "3.7"
 
 services:
-  dbdesafio:
-    image: postgres
-    restart: always
+  db:
+    image: postgres:13.2-alpine
     environment:
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_USER: "postgres"
-      POSTGRES_DB: "crypto_dashboard_dev"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
     ports:
       - "5432:5432"
-    volumes:
-      - ./postgres_data:/var/lib/postgresql/data
     networks:
-      - postgres-compose-network
-
+      - docker-network
 networks:
-  postgres-compose-network:
+  docker-network:
     driver: bridge
