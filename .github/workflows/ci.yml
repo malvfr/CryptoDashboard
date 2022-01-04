@@ -75,7 +75,7 @@ jobs:
     needs: dependencies
     strategy:
       matrix:
-        elixir: ["1.12.3"]
+        elixir: ["1.13"]
         otp: ["24.1.7"]
     services:
       db:
