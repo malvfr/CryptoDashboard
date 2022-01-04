@@ -48,7 +48,6 @@ defmodule CryptoDashboardWeb.AssetController do
   end
 
   def show(conn, params) do
-    IO.inspect params
     assets = Portfolio.list_asset(params["id"])
     render(conn, "show.html", assets: assets)
   end

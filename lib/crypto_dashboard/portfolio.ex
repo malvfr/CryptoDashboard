@@ -118,10 +118,17 @@ defmodule CryptoDashboard.Portfolio do
       select asset_code, sum(quantity), avg(unit_price) from assets group by asset_code
   """
   def list_assets(id) do
-    query = from ast in Asset,
-      where: ast.wallet_id ==  ^id,
-      select: [ast.asset_code, sum(ast.quantity), sum(ast.unit_price * ast.quantity) / sum(ast.quantity), sum(ast.unit_price * ast.quantity)],
-      group_by: [ast.asset_code]
+    query =
+      from ast in Asset,
+        where: ast.wallet_id == ^id,
+        select: [
+          ast.asset_code,
+          sum(ast.quantity),
+          sum(ast.unit_price * ast.quantity) / sum(ast.quantity),
+          sum(ast.unit_price * ast.quantity)
+        ],
+        group_by: [ast.asset_code]
+
     Repo.all(query)
   end
 
@@ -136,7 +143,7 @@ defmodule CryptoDashboard.Portfolio do
       select asset_code, sum(quantity), avg(unit_price) from assets group by asset_code
   """
   def list_asset(id) do
-    query = from(Asset, [where: [asset_code: ^id], order_by: :inserted_at])
+    query = from(Asset, where: [asset_code: ^id], order_by: :inserted_at)
     Repo.all(query)
   end
 
