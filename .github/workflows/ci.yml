@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        elixir: ["1.12.3"]
+        elixir: ["1.13"]
         otp: ["24.1.7"]
     steps:
       - name: Cancel previous runs
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        elixir: ["1.12.3"]
+        elixir: ["1.13"]
         otp: ["24.1.7"]
     steps:
       - name: Cancel previous runs
