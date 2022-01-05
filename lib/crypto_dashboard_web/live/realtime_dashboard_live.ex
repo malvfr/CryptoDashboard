@@ -5,10 +5,10 @@ defmodule CryptoDashboardWeb.RealtimeDashboardLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    assets = ["btcusdt", "ethusdt", "xrpusdt"]
+    assets = Application.get_env(:crypto_dashboard, :default_crypto_symbols)
     CryptoDashboard.subscribe(assets)
 
-    socket = assign(socket, card_ids: assets, event: %{"s" => ""})
+    socket = assign(socket, card_ids: assets, event: %{"s" => ""}, loading: true)
     {:ok, socket}
   end
 
@@ -16,7 +16,12 @@ defmodule CryptoDashboardWeb.RealtimeDashboardLive do
     Logger.debug("HANDLE_INFO message: #{inspect(msg)}")
     Logger.debug("HANDLE_INFO socket: #{inspect(socket.assigns)}")
 
-    send_update(CurrencyBoxComponent, id: msg["s"] |> String.downcase(), event: msg)
+    send_update(CurrencyBoxComponent,
+      id: msg["s"] |> String.downcase(),
+      event: msg,
+      loading: false
+    )
+
     {:noreply, socket}
   end
 end

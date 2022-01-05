@@ -1,8 +1,7 @@
 <div>
     <%= #live_component @socket, CryptoDashboardWeb.RealtimeDashboardLive.CurrencyBoxComponent, event: @crypto_data %>
 
-    <%= for card_id <- @card_ids do %>
-        <%IO.inspect(@event) %>
-        <%= live_component @socket, CryptoDashboardWeb.RealtimeDashboardLive.CurrencyBoxComponent, id: card_id, event: @event %>
+     <%= for card_id <- @card_ids do %>
+        <%= live_component @socket, CryptoDashboardWeb.RealtimeDashboardLive.CurrencyBoxComponent, id: card_id, event: @event, loading: @loading %>
     <% end %>
 </div>

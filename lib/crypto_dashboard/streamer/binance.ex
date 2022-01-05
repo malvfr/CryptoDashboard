@@ -31,7 +31,7 @@ defmodule CryptoDashboard.Streamer.Binance do
   end
 
   def handle_cast({:send, {type, msg} = frame}, state) do
-    IO.puts("Sending #{type} frame with payload: #{msg}")
+    Logger.info("Sending #{type} frame with payload: #{msg}")
     {:reply, frame, state}
   end
 end
