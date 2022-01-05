@@ -19,7 +19,8 @@ defmodule CryptoDashboard.Application do
       # Start a worker by calling: CryptoDashboard.Worker.start_link(arg),
       {Task,
        fn ->
-         ["btcusdt", "xrpusdt", "ethusdt"]
+         :crypto_dashboard
+         |> Application.get_env(:default_crypto_symbols)
          |> Enum.each(&CryptoDashboard.DynamicStreamerSupervisor.start_worker/1)
        end},
       {DynamicSupervisor, strategy: :one_for_one, name: CryptoDashboard.DynamicStreamerSupervisor}

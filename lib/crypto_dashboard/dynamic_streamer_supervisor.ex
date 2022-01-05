@@ -13,13 +13,11 @@ defmodule CryptoDashboard.DynamicStreamerSupervisor do
   end
 
   def start_worker(symbol) do
-    Logger.info("Starting streaming #{symbol} trade events")
+    Logger.info("Starting streaming #{symbol} candle data")
     start_child(symbol)
   end
 
   defp start_child(args) do
-    IO.inspect(args, label: "args", limit: :infinity)
-
     DynamicSupervisor.start_child(
       __MODULE__,
       {Binance, args}
